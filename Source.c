@@ -13,9 +13,9 @@ X-O TASK 1
 
 char matrix[3][3] = { {' ',' ',' '},{' ',' ',' '},{' ',' ',' '} };  //initialize XO table with spaces
 char choice;                                                       //X-O input
+int column, row;
 
-
-bool input(int column, int row)
+bool position(int column, int row)
 {
     if (matrix[row - 1][column - 1] == ' ')   // -1 because array starts from 0 not 1
     {
@@ -27,69 +27,69 @@ bool input(int column, int row)
 }
 
 
-char WinMove(char arr[3][3])          //checks all possible winning rows, columns,and diagonals
+char WinMove(char matrix[3][3])          //checks all possible winning rows, columns,and diagonals
 {
-    if ((arr[0][0] == 'x') && (arr[0][1] == 'x') && (arr[0][2] == 'x'))         //row 1
+    if ((matrix[0][0] == 'x') && (matrix[0][1] == 'x') && (matrix[0][2] == 'x'))         //row 1
     {
         return 'x';
     }
-    else if ((arr[1][0] == 'x') && (arr[1][1] == 'x') && (arr[1][2] == 'x'))    //row 2
+    else if ((matrix[1][0] == 'x') && (matrix[1][1] == 'x') && (matrix[1][2] == 'x'))    //row 2
     {
         return 'x';
     }
-    else if ((arr[2][0] == 'x') && (arr[2][1] == 'x') && (arr[2][2] == 'x'))    //row 3
+    else if ((matrix[2][0] == 'x') && (matrix[2][1] == 'x') && (matrix[2][2] == 'x'))    //row 3
     {
         return 'x';
     }
-    else if ((arr[0][0] == 'x') && (arr[1][0] == 'x') && (arr[2][0] == 'x'))    //column 1
+    else if ((matrix[0][0] == 'x') && (matrix[1][0] == 'x') && (matrix[2][0] == 'x'))    //column 1
     {
         return 'x';
     }
-    else if ((arr[0][1] == 'x') && (arr[1][1] == 'x') && (arr[2][1] == 'x'))    //column 2
+    else if ((matrix[0][1] == 'x') && (matrix[1][1] == 'x') && (matrix[2][1] == 'x'))    //column 2
     {
         return 'x';
     }
-    else if ((arr[0][2] == 'x') && (arr[1][2] == 'x') && (arr[2][2] == 'x'))    //column 3
+    else if ((matrix[0][2] == 'x') && (matrix[1][2] == 'x') && (matrix[2][2] == 'x'))    //column 3
     {
         return 'x';
     }
-    else if ((arr[0][0] == 'o') && (arr[0][1] == 'o') && (arr[0][2] == 'o'))    //row 1
+    else if ((matrix[0][0] == 'o') && (matrix[0][1] == 'o') && (matrix[0][2] == 'o'))    //row 1
     {
         return 'o';
     }
-    else if ((arr[1][0] == 'o') && (arr[1][1] == 'o') && (arr[1][2] == 'o'))    //row 2
+    else if ((matrix[1][0] == 'o') && (matrix[1][1] == 'o') && (matrix[1][2] == 'o'))    //row 2
     {
         return 'o';
     }
-    else if ((arr[2][0] == 'o') && (arr[2][1] == 'o') && (arr[2][2] == 'o'))    //row 3
+    else if ((matrix[2][0] == 'o') && (matrix[2][1] == 'o') && (matrix[2][2] == 'o'))    //row 3
     {
         return 'o';
     }
-    else if ((arr[0][0] == 'o') && (arr[1][0] == 'o') && (arr[2][0] == 'o'))    //column 1
+    else if ((matrix[0][0] == 'o') && (matrix[1][0] == 'o') && (matrix[2][0] == 'o'))    //column 1
     {
         return 'o';
     }
-    else if ((arr[0][1] == 'o') && (arr[1][1] == 'o') && (arr[2][1] == 'o'))    //column 2
+    else if ((matrix[0][1] == 'o') && (matrix[1][1] == 'o') && (matrix[2][1] == 'o'))    //column 2
     {
         return 'o';
     }
-    else if ((arr[0][2] == 'o') && (arr[1][2] == 'o') && (arr[2][2] == 'o'))    //column 3
+    else if ((matrix[0][2] == 'o') && (matrix[1][2] == 'o') && (matrix[2][2] == 'o'))    //column 3
     {
         return 'o';
     }
-    else if ((arr[0][0] == 'x') && (arr[1][1] == 'x') && (arr[2][2] == 'x'))    //diagonal 1
+    else if ((matrix[0][0] == 'x') && (matrix[1][1] == 'x') && (matrix[2][2] == 'x'))    //diagonal 1
     {
         return 'x';
     }
-    else if ((arr[2][0] == 'x') && (arr[1][1] == 'x') && (arr[0][2] == 'x'))    //diagonal 2
+    else if ((matrix[2][0] == 'x') && (matrix[1][1] == 'x') && (matrix[0][2] == 'x'))    //diagonal 2
     {
         return 'x';
     }
-    else if ((arr[0][0] == 'o') && (arr[1][1] == 'o') && (arr[2][2] == 'o'))    //diagonal 1
+    else if ((matrix[0][0] == 'o') && (matrix[1][1] == 'o') && (matrix[2][2] == 'o'))    //diagonal 1
     {
         return 'o';
     }
-    else if ((arr[2][0] == 'o') && (arr[1][1] == 'o') && (arr[0][2] == 'o'))    //diagonal 2
+    else if ((matrix[2][0] == 'o') && (matrix[1][1] == 'o') && (matrix[0][2] == 'o'))    //diagonal 2
     {
         return 'o';
     }
@@ -99,9 +99,7 @@ char WinMove(char arr[3][3])          //checks all possible winning rows, column
 
 void display()
 {
-    int i;
-
-    for (i = 0; i < 3; i++)
+    for (int i = 0; i < 3; i++)
     {
         printf(" %c | %c | %c ", matrix[i][0], matrix[i][1], matrix[i][2]);
 
@@ -122,11 +120,6 @@ int main()
         scanf(" %c", &choice);
     } while (choice != 'x' && choice != 'o');
 
-    int column, row;
-    //ans = 'x';
-
-    printf("   1  2  3 \n 1\n 2\n 3\n");        //coordinates for table
-
     for (int i = 0; i < 9; i++)
     {
         printf("\n%c turn\nEnter coordinates: ", choice);
@@ -136,7 +129,7 @@ int main()
         scanf("%d", &row);
 
 
-        if (input(column, row))
+        if (position(column, row))
         {
             display();
             if (WinMove(matrix) == 'x')
@@ -151,7 +144,7 @@ int main()
             }
             else if ((WinMove(matrix) == 't') && (i == 8))
             {
-                printf("Game Over - TIE!\n");
+                printf("TIE!\n");
             }
 
             if (choice == 'x')             //to change turns bet. X & O
@@ -162,7 +155,7 @@ int main()
         else
         {
             i--;                        //to not count as a turn
-            printf("olace is not empty. Try again\n");
+            printf("FULL. Try another coordinate\n");
         }
     }
     return 0;
